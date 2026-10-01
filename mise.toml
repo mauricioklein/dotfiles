@@ -1,0 +1,97 @@
+[settings]
+dotfiles.root = "~/.dotfiles"
+minimum_release_age = "2d"
+task.run_auto_install = false
+
+[bootstrap.packages]
+"brew:zsh" = "latest"
+"brew:git" = "latest"
+"brew:worktrunk" = "latest"
+"brew:eza" = "latest"
+
+[tools]
+"aqua:aws/aws-cli" = "latest"
+bat = "latest"
+bun = "latest"
+claude = "latest"
+codex = "latest"
+delta = "latest"
+fd = "latest"
+fzf = "latest"
+gh = "latest"
+go = "latest"
+herdr = "latest"
+java = "temurin-11.0.32"
+lazygit = "latest"
+jq = "latest"
+node = "26"
+pandoc = "latest"
+pi = "latest"
+python = "3.14"
+ripgrep = "latest"
+rust = "latest"
+starship = "latest"
+uv = "latest"
+zig = "latest"
+zoxide = "latest"
+
+[tasks.bootstrap]
+dir = "~/.dotfiles"
+run = "./scripts/generate-caches.sh"
+
+[tasks.check]
+description = "Check links, managed state, generated files, and shell configuration"
+dir = "~/.dotfiles"
+run = "./scripts/check.sh"
+
+[tasks.repair]
+description = "Apply the declared setup, regenerate artifacts, and check it"
+dir = "~/.dotfiles"
+run = ["./bootstrap.sh", "./scripts/repair.sh", "mise run check"]
+
+[tasks."update:preview"]
+description = "Preview tool, package, prune, and unmanaged package changes"
+dir = "~/.dotfiles"
+run = [
+  "mise upgrade --dry-run; printf '\\n'",
+  "mise outdated --bump; printf '\\n'",
+  "mise bootstrap packages upgrade --dry-run; printf '\\n'",
+  "mise prune --dry-run; printf '\\n'",
+  "mise bootstrap packages import --manager brew --dry-run --path mise.toml; printf '\\n'",
+]
+
+[tasks.update]
+description = "Apply policy-safe updates, regenerate artifacts, and check"
+dir = "~/.dotfiles"
+run = [
+  "mise upgrade",
+  "mise bootstrap packages upgrade",
+  "./scripts/generate-caches.sh",
+  "mise run check",
+]
+
+[dotfiles]
+# Self-management — mise manages its own config symlink
+"~/.config/mise/config.toml" = "~/.dotfiles/mise.toml"
+
+# Git
+"~/.gitconfig"         = "~/.dotfiles/git/.gitconfig"
+"~/.gitignore_global"  = "~/.dotfiles/git/.gitignore_global"
+
+# Editors & terminal
+"~/.vimrc"             = "~/.dotfiles/vim/.vimrc"
+"~/.hushlogin"         = "~/.dotfiles/misc/hushlogin"
+
+# XDG config directories
+"~/.config/delta"      = "~/.dotfiles/config/delta"
+"~/.config/ripgrep"    = "~/.dotfiles/config/ripgrep"
+"~/.config/gh"         = "~/.dotfiles/config/gh"
+"~/.config/starship.toml"     = "~/.dotfiles/starship/starship.toml"
+"~/.config/herdr/config.toml" = "~/.dotfiles/config/herdr/config.toml"
+
+# Shell completions
+"~/.local/share/zsh/site-functions" = { source = "~/.dotfiles/zsh/completions", mode = "symlink-each" }
+
+# Edit entries: inject source lines into shell rc files
+"~/.zshenv/dotfiles"   = { block = '[ -f "$HOME/.dotfiles/zsh/.zshenv" ] && source "$HOME/.dotfiles/zsh/.zshenv"' }
+"~/.zshrc/dotfiles"    = { block = '[ -f "$HOME/.dotfiles/zsh/.zshrc" ] && source "$HOME/.dotfiles/zsh/.zshrc"' }

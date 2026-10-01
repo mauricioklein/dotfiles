@@ -1,0 +1,18 @@
+# Cache directory - all files here are machine-specific and regenerated
+zsh/cache/
+
+# Completions directory - all files here are machine-specific and regenerated
+zsh/completions/
+
+# Compiled zsh files (zcompile, machine-specific)
+*.zwc
+
+# Environment secrets and machine-local overrides
+.env
+.env.*
+.zshenv.local
+.zshrc.local
+.gitconfig.local
+
+# GitHub CLI authentication state (may contain tokens)
+/config/gh/hosts.yml

@@ -1,0 +1,40 @@
+# Starship configuration - optimized for speed
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Simplified format for performance (Python/git_status disabled for speed)
+format = '''
+$directory$git_branch$nodejs$character
+'''
+
+# Character indicator
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+# Directory
+[directory]
+style = 'cyan'
+truncation_length = 3
+truncate_to_repo = true
+read_only = '🔒'
+
+# Git branch
+[git_branch]
+symbol = ' '
+style = 'purple'
+format = '[$symbol$branch]($style) '
+
+# Git status - disabled (slow in large repos)
+[git_status]
+disabled = true
+
+# Python
+[python]
+disabled = false
+
+# Node.js
+[nodejs]
+symbol = ' '
+detect_extensions = []
+detect_files = ['package.json', '.node-version']
+detect_folders = ['node_modules']

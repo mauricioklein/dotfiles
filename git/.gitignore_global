@@ -1,0 +1,7 @@
+.DS_Store
+.idea/
+.env.zsh
+.env_leave.zsh
+.attach_pid*
+
+**/.claude/settings.local.json

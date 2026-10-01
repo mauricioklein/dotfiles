@@ -1,0 +1,113 @@
+[include]
+  path = "~/.config/delta/features.toml"
+
+[alias]
+  amend         = commit --amend -C HEAD                 # Amend the last commit
+  branchName    = rev-parse --abbrev-ref HEAD            # Get the current branch name
+  cleanall      = clean -fd                              # Cleanup untracked filed
+  files         = diff-tree --no-commit-id --name-only   # List all files in a commit
+  fixup         = commit --fixup                         # Make a fixup commit
+  remoteSetHead = remote set-head origin --auto          # Track the local branch with the equivalent in remote
+  reword        = commit --amend                         # Rewrite the last commit message
+
+  # Serve local repo. http://coderwall.com/p/eybtga
+  # Then other can access via `git clone git://#{YOUR_IP_ADDRESS_OR_HOSTNAME}/
+  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = white bold
+  local = yellow
+  remote = cyan
+
+[color "diff"]
+  frag = cyan bold
+  meta = white
+  new = green bold
+  old = red bold
+  commit = yellow bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+[color "status"]
+  untracked = cyan
+
+[commit]
+  verbose = true
+
+[core]
+  editor = vim
+  pager = delta
+  excludesfile = ~/.gitignore_global
+
+  # Make `git rebase` safer on macOS.
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+  # ============================================================
+  # PERFORMANCE: Large repo optimizations (remove if issues)
+  # ============================================================
+  # Caches untracked files list (big speedup for git status)
+  untrackedCache = true
+  # Uses filesystem events instead of scanning (huge speedup on macOS)
+  fsmonitor = true
+
+[feature]
+  # Enables optimizations for repos with many files
+  manyFiles = true
+
+[includeIf "gitdir:~/workspace/Trantor/"]
+  path = ~/.dotfiles/git/.gitconfig-trantor
+
+[delta]
+  features = "two-panes"
+  navigate = true # use n and N to move between diff sections
+
+[diff]
+  colorMoved = default
+
+[fetch]
+  prune = true
+
+[protocol]
+  # Use protocol v2 for faster fetches (especially with many branches)
+  version = 2
+
+[format]
+  pretty = format:%C(auto)%h %ar %Cred%d %C(green)%aN%Creset %s
+
+[init]
+  defaultBranch = main
+
+[merge]
+  conflictstyle = diff3
+
+[pack]
+  # Lower compression = faster fetch/push (trade: slightly larger transfers)
+  compression = 1
+  # Smaller window = less CPU during fetch (good for large repos)
+  window = 10
+
+[pager]
+  branch = false
+
+[pull]
+  twohead = ort
+  rebase = true
+
+[push]
+  default = simple
+
+[rebase]
+  autosquash = true
+  updateRefs = true
+
+[include]
+  path = ~/.gitconfig.local

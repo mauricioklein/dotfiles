@@ -1,0 +1,2 @@
+[core]
+  excludesfile = ~/.dotfiles/git/.gitignore_global_trantor
