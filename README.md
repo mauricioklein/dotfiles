@@ -63,9 +63,15 @@ drift without editing it.
 ## Herdr
 
 Herdr is optional. When enabled, its config is managed at
-`~/.config/herdr/config.toml`; the default prefix is `Ctrl-Space`. Disable the
-macOS input-source shortcut if it intercepts that key. The tracked config
-contains the complete binding reference.
+`~/.config/herdr/config.toml`; the default prefix is `Ctrl-Space`. On macOS,
+disable these shortcuts in **System Settings → Keyboard → Keyboard Shortcuts**
+so they don't intercept Herdr bindings:
+
+- **Input Sources → Select the previous input source** (`Ctrl-Space`)
+- **Mission Control → Mission Control** (`Ctrl-Up`)
+- **Mission Control → Application windows** (`Ctrl-Down`)
+
+The tracked config contains the complete binding reference.
 
 AI agents should start with [`AGENTS.md`](AGENTS.md), then read the focused
 architecture, troubleshooting, or maintenance document under `docs/agents/`.

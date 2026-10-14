@@ -47,11 +47,13 @@ prefix = "ctrl+space"
 #   k / K → rename tab / rename workspace
 
 # --- Workspace (= tmux session) ---
+# macOS intercepts these unless disabled in Keyboard Shortcuts → Mission Control:
+# Mission Control (Ctrl+Up) and Application windows (Ctrl+Down).
 new_workspace      = "prefix+shift+n"
 rename_workspace   = "prefix+shift+k"
 close_workspace    = "prefix+shift+x"
-previous_workspace = "alt+up"
-next_workspace     = "alt+down"
+previous_workspace = "ctrl+up"
+next_workspace     = "ctrl+down"
 
 # --- Tab (= tmux window) ---
 new_tab      = "prefix+n"
