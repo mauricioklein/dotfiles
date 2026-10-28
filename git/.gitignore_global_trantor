@@ -2,9 +2,6 @@
 # Ignore artifacts only in repos under ~/workspace/Trantor
 #
 
-# Agents file
-AGENTS.md
-
 # Coding agent folders
 .opencode/
 .pi/
