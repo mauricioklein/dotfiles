@@ -34,7 +34,7 @@ starship = "latest"
 uv = "latest"
 zig = "latest"
 zoxide = "latest"
-pnpm = "12.16.1"
+pnpm = "latest"
 
 [tasks.bootstrap]
 dir = "~/.dotfiles"
