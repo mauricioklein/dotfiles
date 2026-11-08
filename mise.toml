@@ -1,6 +1,6 @@
 [settings]
 dotfiles.root = "~/.dotfiles"
-minimum_release_age = "2d"
+minimum_release_age = "1d"
 task.run_auto_install = false
 
 [bootstrap.packages]
