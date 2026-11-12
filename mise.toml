@@ -93,6 +93,16 @@ run = [
   "mise run check",
 ]
 
+[tasks."brew:upgrade:unmanaged:preview"]
+description = "Preview all Homebrew upgrades, including packages not managed by mise"
+dir = "~/.dotfiles"
+run = "brew upgrade -g --dry-run"
+
+[tasks."brew:upgrade:unmanaged"]
+description = "Upgrade all Homebrew packages, including packages not managed by mise, then clean up"
+dir = "~/.dotfiles"
+run = "brew upgrade -g && brew cleanup"
+
 [dotfiles]
 # Self-management — mise manages its own config symlink
 "~/.config/mise/config.toml" = "~/.dotfiles/mise.toml"

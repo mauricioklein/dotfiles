@@ -37,6 +37,21 @@ rewrite `mise.toml`. Review any explicit change to a Node/Python constraint or
 exact Java selector as a compatibility decision before applying it. Updating
 mise itself is a separate, approved maintenance step.
 
+## Extra Homebrew upgrades
+
+`mise run brew:upgrade:unmanaged:preview` runs
+`brew upgrade -g --dry-run`. After reviewing and approving the changes,
+`mise run brew:upgrade:unmanaged` runs `brew upgrade -g && brew cleanup`.
+Cleanup runs only after a successful upgrade and removes old Homebrew versions
+and stale downloads, not arbitrary untracked files. This handles Homebrew-owned
+casks that mise leaves unchanged, as well as packages not tracked by mise.
+
+Despite the task name, this upgrades all installed Homebrew packages, including
+those declared in mise and self-updating casks; it does not filter by mise
+ownership or enforce mise's minimum release age. Keep it separate from the
+normal update flow and verify release ages against the applicable policy
+before approving upgrades.
+
 ## Tools and configuration
 
 To add a tool, add its selector under `[tools]`, run the preview, and then use

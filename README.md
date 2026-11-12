@@ -33,6 +33,22 @@ Run `mise run update:preview` before `mise run update`. Updates respect the
 2-day release hold in `mise.toml`; changing an exact or major selector is a
 separate reviewed edit.
 
+For Homebrew-owned packages that mise leaves unchanged, and packages not
+tracked by mise:
+
+```bash
+mise run brew:upgrade:unmanaged:preview
+mise run brew:upgrade:unmanaged
+```
+
+The preview runs `brew upgrade -g --dry-run`; the upgrade task runs
+`brew upgrade -g && brew cleanup`. Cleanup removes old Homebrew versions and
+stale downloads, not arbitrary untracked files, and runs only if the upgrade
+succeeds. These tasks cover **all installed Homebrew packages**, including
+self-updating casks and packages declared in mise; they do not filter out
+mise-tracked packages or apply mise's release hold. Review the preview before
+applying upgrades.
+
 ## Customization
 
 - Shared changes belong in tracked files under `zsh/`, `git/`, `vim/`,
