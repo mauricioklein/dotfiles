@@ -88,6 +88,7 @@ description = "Apply policy-safe updates, regenerate artifacts, and check"
 dir = "~/.dotfiles"
 run = [
   "mise upgrade",
+  "mise prune -y",
   "mise bootstrap packages upgrade",
   "./scripts/generate-caches.sh",
   "mise run check",
